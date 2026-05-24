@@ -243,7 +243,7 @@
                 { nama: "Blue Ocean Lemon", harga: "7k", desc: "Sensasi asam manis lemon dengan tampilan biru segar.", img: "blue-ocean.png" },
                 { nama: "Lemon Tea", harga: "7k", desc: "Teh lemon dengan takaran asam manis yang seimbang.", img: "lemon-tea.png" },
                 { nama: "Matcha", harga: "9k", desc: "Teh hijau dengan aroma khas yang autentik dan manis pas.", img: "matcha.png" },
-                { nama: "Milo", harga: "9k", desc: "Racikan cokelat Milo yang kental dan pekat.", img: "milo.png" }
+                { nama: "Milo", harga: "9k", desc: "Racikan cokelat Milo yang kental and pekat.", img: "milo.png" }
             ],
             "A La Carte": [
                 { nama: "Ayam Crispy", harga: "6k", desc: "Ayam krispi boneless renyah.", img: "ayam-carte.png" },
@@ -272,7 +272,6 @@
 
             // Inject Section Menu
             const secEl = document.createElement('section');
-            // DEFAULT: Kategori 'pasta' langsung muncul, kategori lain otomatis tersembunyi ('hidden')
             secEl.className = `menu-section mb-16 md:mb-24 transition-all duration-500 ${slug === 'pasta' ? '' : 'hidden'}`;
             secEl.id = slug;
 
@@ -333,7 +332,6 @@
             categoryArrow.classList.toggle('rotate-180');
         });
 
-        // SYSTEM FILTER TAB: Menampilkan 1 kategori terpilih saja, sisanya disembunyikan total
         document.querySelectorAll('.category-filter').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -350,7 +348,7 @@
                 
                 categoryDropdown.classList.add('hidden');
                 categoryArrow.classList.remove('rotate-180');
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Otomatis balik ke atas navbar pas ganti menu
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
 
@@ -391,7 +389,8 @@
                 document.getElementById('optionsModal').classList.remove('hidden');
             } 
             else {
-                cartPushItem(name, basePrice, "Polos", true);
+                // FIXED: Diubah dari true ke false agar item langsung masuk keranjang tanpa trigger sidebar terbuka
+                cartPushItem(name, basePrice, "Polos", false);
             }
         }
 
@@ -425,7 +424,8 @@
                 variantDetails = chickenType;
             }
 
-            cartPushItem(currentSelectedMenu.name, finalPricePerItem, variantDetails, true);
+            // FIXED: Diubah dari true ke false agar setelah kustomisasi modal, sidebar keranjang tidak melompat terbuka
+            cartPushItem(currentSelectedMenu.name, finalPricePerItem, variantDetails, false);
             closeOptionsModal();
         }
 
