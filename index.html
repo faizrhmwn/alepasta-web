@@ -64,14 +64,14 @@
         <nav class="p-4 md:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto px-4 md:px-8">
             <div class="relative text-left">
                 <button id="categoryBtn" class="flex flex-col text-left focus:outline-none group">
-                    <span class="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-50 transition group-hover:text-[#f14e06]">Kategori</span>
-                    <span class="text-[11px] md:text-xs font-bold text-zinc-800 flex items-center gap-1 transition group-hover:text-[#f14e06]">
-                        <span id="selectedCategoryText" class="uppercase">All</span> <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <span class="text-[11px] md:text-[13px] font-black tracking-widest uppercase opacity-50 transition group-hover:text-[#f14e06]">Kategori</span>
+                    <span class="text-sm md:text-base font-bold text-zinc-800 flex items-center gap-1 transition group-hover:text-[#f14e06]">
+                        <span id="selectedCategoryText" class="uppercase">All</span> <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                         </svg>
                     </span>
                 </button>
-                <div id="categoryDropdown" class="hidden absolute left-0 mt-2 w-44 md:w-48 bg-white shadow-2xl rounded-2xl border border-[#f14e06]/10 overflow-hidden z-50">
+                <div id="categoryDropdown" class="hidden absolute left-0 mt-2 w-52 md:w-64 bg-white shadow-2xl rounded-2xl border border-[#f14e06]/10 overflow-hidden z-50">
                     <div id="categoryDropdownItems" class="p-2 flex flex-col">
                     </div>
                 </div>
@@ -176,8 +176,8 @@
             </div>
 
             <div class="mb-6">
-                <label class="text-[10px] font-black tracking-widest uppercase opacity-60 block mb-2.5">📝 Catatan (opsional)</label>
-                <textarea id="modalNotes" rows="2" placeholder="Contoh: tanpa timun, extra keju, dll..." class="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-xs font-semibold text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-[#f14e06] resize-none transition"></textarea>
+                <label class="text-[10px] font-black tracking-widest uppercase opacity-60 block mb-2.5">📝 Catatan</label>
+                <textarea id="modalNotes" rows="2" placeholder="Contoh: tanpa timun, extra timun, dll..." class="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-xs font-semibold text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-[#f14e06] resize-none transition"></textarea>
             </div>
 
             <div class="flex gap-3">
@@ -288,7 +288,7 @@
         // ── "All" dropdown item ──────────────────────────────────────────────
         const allDropEl = document.createElement('a');
         allDropEl.href = '#all';
-        allDropEl.className = "category-filter px-4 py-2.5 text-xs font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
+        allDropEl.className = "category-filter px-4 py-3 text-sm font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
         allDropEl.setAttribute('data-category', 'all');
         allDropEl.setAttribute('data-name', 'All');
         allDropEl.innerText = 'All';
@@ -347,7 +347,7 @@
             
             const dropEl = document.createElement('a');
             dropEl.href = `#${slug}`;
-            dropEl.className = "category-filter px-4 py-2.5 text-xs font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
+            dropEl.className = "category-filter px-4 py-3 text-sm font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
             dropEl.setAttribute('data-category', slug);
             dropEl.setAttribute('data-name', catName);
             dropEl.innerText = catName;
