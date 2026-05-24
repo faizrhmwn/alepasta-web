@@ -44,7 +44,7 @@
                 <button id="categoryBtn" class="flex flex-col text-left focus:outline-none group">
                     <span class="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-50 transition group-hover:text-[#f14e06]">Cari Menu</span>
                     <span class="text-[11px] md:text-xs font-bold text-zinc-800 flex items-center gap-1 transition group-hover:text-[#f14e06]">
-                        <span id="selectedCategoryText" class="uppercase">Pasta</span> <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span id="selectedCategoryText" class="uppercase">All</span> <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                         </svg>
                     </span>
@@ -258,10 +258,61 @@
         const dropdownContainer = document.getElementById('categoryDropdownItems');
         const menuContainer = document.getElementById('menuContainer');
 
+        // ── "All" dropdown item ──────────────────────────────────────────────
+        const allDropEl = document.createElement('a');
+        allDropEl.href = '#all';
+        allDropEl.className = "category-filter px-4 py-2.5 text-xs font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
+        allDropEl.setAttribute('data-category', 'all');
+        allDropEl.setAttribute('data-name', 'All');
+        allDropEl.innerText = 'All';
+        dropdownContainer.appendChild(allDropEl);
+
+        // ── "All" section: flat list of every item across all categories ────
+        const allSection = document.createElement('section');
+        allSection.className = 'menu-section mb-16 md:mb-24 transition-all duration-500';
+        allSection.id = 'all';
+
+        let allItemsHtml = '';
+        Object.entries(menuCategories).forEach(([catName, items]) => {
+            const slug = catName.toLowerCase().replace(/\s+/g, '-');
+            items.forEach(item => {
+                const isWrap = item.nama.toLowerCase().includes('wrap');
+                const isPasta = (slug === 'pasta');
+                const hoverText = (isPasta || isWrap) ? "Pilih Opsi Menu" : "Tambah Ke Keranjang";
+                const numericPrice = parseInt(item.harga);
+                const safeName = item.nama.replace(/'/g, "\\'");
+
+                allItemsHtml += `
+                    <div onclick="openOptionsModal('${safeName}', ${numericPrice}, '${slug}')" class="group border-b border-[#f14e06]/10 pb-8 md:pb-10 block cursor-pointer select-none">
+                        <div class="aspect-square bg-zinc-200 mb-4 md:mb-6 overflow-hidden rounded-xl shadow-inner relative">
+                            <img src="assets/img/${item.img}" alt="${item.nama}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700 ease-in-out">
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <span class="bg-[#f1ece6] text-[#f14e06] text-[11px] md:text-xs font-black px-4 py-2 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition duration-300 uppercase tracking-wider">${hoverText}</span>
+                            </div>
+                            <span class="absolute top-2 left-2 bg-[#f14e06]/90 text-[#f1ece6] text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded-lg">${catName}</span>
+                        </div>
+                        <div class="flex justify-between items-start mb-2 md:mb-3">
+                            <h4 class="text-xl md:text-2xl font-black uppercase tracking-tight italic group-hover:text-zinc-800 transition">${item.nama}</h4>
+                            <span class="text-xl md:text-2xl font-black italic bg-[#f14e06] text-[#f1ece6] px-2 leading-none py-1 rounded">${item.harga}</span>
+                        </div>
+                        <p class="text-xs md:text-sm opacity-70 leading-relaxed font-semibold text-zinc-700">${item.desc}</p>
+                    </div>`;
+            });
+        });
+
+        allSection.innerHTML = `
+            <div class="flex items-center gap-4 mb-8 md:mb-12">
+                <h3 class="text-2xl md:text-4xl font-black uppercase italic tracking-tighter">All Menu</h3>
+                <div class="h-[2px] flex-grow bg-[#f14e06] opacity-20"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-12 gap-y-10 md:gap-y-16">${allItemsHtml}</div>`;
+
+        menuContainer.appendChild(allSection);
+
+        // ── Per-category sections (hidden by default) ─────────────────────
         Object.keys(menuCategories).forEach(catName => {
             const slug = catName.toLowerCase().replace(/\s+/g, '-');
             
-            // Inject Dropdown Item
             const dropEl = document.createElement('a');
             dropEl.href = `#${slug}`;
             dropEl.className = "category-filter px-4 py-2.5 text-xs font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
@@ -270,9 +321,8 @@
             dropEl.innerText = catName;
             dropdownContainer.appendChild(dropEl);
 
-            // Inject Section Menu
             const secEl = document.createElement('section');
-            secEl.className = `menu-section mb-16 md:mb-24 transition-all duration-500 ${slug === 'pasta' ? '' : 'hidden'}`;
+            secEl.className = `menu-section mb-16 md:mb-24 transition-all duration-500 hidden`;
             secEl.id = slug;
 
             let itemsHtml = '';
@@ -281,7 +331,6 @@
                 const isPasta = (slug === 'pasta');
                 const hoverText = (isPasta || isWrap) ? "Pilih Opsi Menu" : "Tambah Ke Keranjang";
                 const numericPrice = parseInt(item.harga);
-
                 const safeName = item.nama.replace(/'/g, "\\'");
 
                 itemsHtml += `
@@ -389,7 +438,6 @@
                 document.getElementById('optionsModal').classList.remove('hidden');
             } 
             else {
-                // FIXED: Diubah dari true ke false agar item langsung masuk keranjang tanpa trigger sidebar terbuka
                 cartPushItem(name, basePrice, "Polos", false);
             }
         }
@@ -424,7 +472,6 @@
                 variantDetails = chickenType;
             }
 
-            // FIXED: Diubah dari true ke false agar setelah kustomisasi modal, sidebar keranjang tidak melompat terbuka
             cartPushItem(currentSelectedMenu.name, finalPricePerItem, variantDetails, false);
             closeOptionsModal();
         }
