@@ -30,7 +30,6 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #f1ece6; 
             color: #f14e06; 
-            scroll-behavior: smooth;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -45,8 +44,7 @@
                 <button id="categoryBtn" class="flex flex-col text-left focus:outline-none group">
                     <span class="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-50 transition group-hover:text-[#f14e06]">Cari Menu</span>
                     <span class="text-[11px] md:text-xs font-bold text-zinc-800 flex items-center gap-1 transition group-hover:text-[#f14e06]">
-                        <span id="selectedCategoryText" class="uppercase">Pilih Kategori</span>
-                        <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span id="selectedCategoryText" class="uppercase">Pasta</span> <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                         </svg>
                     </span>
@@ -89,7 +87,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <main id="menuContainer" class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
@@ -236,7 +233,7 @@
             ],
             "Side": [
                 { nama: "Burger", harga: "10k", desc: "Burger ayam krispi dengan lumeran saus homemade khas Alepasta.", img: "burger.png" },
-                { nama: "Chicken Wrap", harga: "12k", desc: "Tortilla jumbo isian ayam, selada, keju, dan saus Alepasta.", img: "wrap.png" },
+                { nama: "Chicken Wrap", harga: "12k", desc: "Tortilla jumbo isian ayam, selada, keju, and saus Alepasta.", img: "wrap.png" },
                 { nama: "Bolognese Fries", harga: "15k", desc: "Kentang krispi + saus bolognese daging cincang.", img: "bolognese-fries.png" },
                 { nama: "Burger w/Fries", harga: "15k", desc: "Burger ayam krispi yang dipadukan dengan kentang goreng renyah.", img: "burgerwfries.png" },
                 { nama: "Cheesy Fries", harga: "15k", desc: "Kentang krispi + saus keju lumer melimpah.", img: "cheesy-fries.png" },
@@ -259,7 +256,6 @@
         document.getElementById('footerIG').href = brandConfig.linkInstagram;
 
         const dropdownContainer = document.getElementById('categoryDropdownItems');
-        const tabsContainer = document.getElementById('horizontalTabs');
         const menuContainer = document.getElementById('menuContainer');
 
         Object.keys(menuCategories).forEach(catName => {
@@ -268,44 +264,22 @@
             // Inject Dropdown Item
             const dropEl = document.createElement('a');
             dropEl.href = `#${slug}`;
-            dropEl.className = "category-filter px-4 py-2.5 text-xs font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase";
+            dropEl.className = "category-filter px-4 py-2.5 text-xs font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
             dropEl.setAttribute('data-category', slug);
             dropEl.setAttribute('data-name', catName);
             dropEl.innerText = catName;
             dropdownContainer.appendChild(dropEl);
 
-            // Inject Horizontal Capsule Tab Item
-            const tabEl = document.createElement('a');
-            tabEl.href = `#${slug}`;
-            tabEl.className = "px-4 py-2 bg-white border border-[#f14e06]/10 text-[#f14e06] text-[11px] font-black rounded-full shadow-sm uppercase whitespace-nowrap transition-all duration-200 hover:bg-[#f14e06] hover:text-white hover:border-[#f14e06]";
-            tabEl.innerText = catName;
-            tabEl.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetSec = document.getElementById(slug);
-                if(targetSec) {
-                    const offset = 190; // Menghitung jarak tinggi navbar yang nempel di atas
-                    const bodyRect = document.body.getBoundingClientRect().top;
-                    const elementRect = targetSec.getBoundingClientRect().top;
-                    const elementPosition = elementRect - bodyRect;
-                    const offsetPosition = elementPosition - offset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-            tabsContainer.appendChild(tabEl);
-
             // Inject Section Menu
             const secEl = document.createElement('section');
-            secEl.className = "menu-section mb-16 md:mb-24 transition-all duration-500 scroll-mt-48";
+            // DEFAULT: Kategori 'pasta' langsung muncul, kategori lain otomatis tersembunyi ('hidden')
+            secEl.className = `menu-section mb-16 md:mb-24 transition-all duration-500 ${slug === 'pasta' ? '' : 'hidden'}`;
             secEl.id = slug;
 
             let itemsHtml = '';
             menuCategories[catName].forEach(item => {
                 const isWrap = item.nama.toLowerCase().includes('wrap');
-                const isPasta = (slug === 'pasta'); // FIX: Diubah ke 'pasta' sesuai slug baru dari "Pasta"
+                const isPasta = (slug === 'pasta');
                 const hoverText = (isPasta || isWrap) ? "Pilih Opsi Menu" : "Tambah Ke Keranjang";
                 const numericPrice = parseInt(item.harga);
 
@@ -359,12 +333,24 @@
             categoryArrow.classList.toggle('rotate-180');
         });
 
+        // SYSTEM FILTER TAB: Menampilkan 1 kategori terpilih saja, sisanya disembunyikan total
         document.querySelectorAll('.category-filter').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetCategory = link.getAttribute('data-category');
                 selectedCategoryText.innerText = link.getAttribute('data-name');
-                menuSections.forEach(sec => sec.id === link.getAttribute('data-category') ? sec.classList.remove('hidden') : sec.classList.add('hidden'));
+                
+                menuSections.forEach(sec => {
+                    if (sec.id === targetCategory) {
+                        sec.classList.remove('hidden');
+                    } else {
+                        sec.classList.add('hidden');
+                    }
+                });
+                
                 categoryDropdown.classList.add('hidden');
                 categoryArrow.classList.remove('rotate-180');
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Otomatis balik ke atas navbar pas ganti menu
             });
         });
 
@@ -393,7 +379,7 @@
             document.getElementById('pastaOptions').classList.add('hidden');
             document.getElementById('wrapOptions').classList.add('hidden');
 
-            if (categorySlug === 'pasta') { // FIX: Diubah ke 'pasta' agar sinkron dengan nama properti baru
+            if (categorySlug === 'pasta') { 
                 document.getElementById('pastaOptions').classList.remove('hidden');
                 document.querySelector('input[name="pasta_spice"][value="Tidak Pedas"]').checked = true;
                 document.querySelectorAll('input[name="pasta_topping"]').forEach(cb => cb.checked = false);
@@ -420,7 +406,7 @@
             let finalPricePerItem = currentSelectedMenu.basePrice;
             let variantDetails = "";
 
-            if (currentSelectedMenu.category === 'pasta') { // FIX: Diubah ke 'pasta'
+            if (currentSelectedMenu.category === 'pasta') { 
                 const spiceLevel = document.querySelector('input[name="pasta_spice"]:checked').value;
                 let selectedToppings = [];
                 let toppingPriceSum = 0;
