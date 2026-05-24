@@ -39,18 +39,18 @@
 
     <div class="sticky top-0 z-40 bg-[#f1ece6]/90 backdrop-blur-md border-b border-[#f14e06]/10 shadow-sm w-full">
         
-        <nav class="p-6 grid grid-cols-3 items-center max-w-7xl mx-auto px-8">
+        <nav class="p-4 md:p-6 grid grid-cols-3 items-center max-w-7xl mx-auto px-4 md:px-8">
             <div class="relative text-left">
                 <button id="categoryBtn" class="flex flex-col text-left focus:outline-none group">
-                    <span class="text-[10px] font-black tracking-widest uppercase opacity-50 transition group-hover:text-[#f14e06]">Cari Menu</span>
-                    <span class="text-xs font-bold text-zinc-800 flex items-center gap-1 transition group-hover:text-[#f14e06]">
+                    <span class="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-50 transition group-hover:text-[#f14e06]">Cari Menu</span>
+                    <span class="text-[11px] md:text-xs font-bold text-zinc-800 flex items-center gap-1 transition group-hover:text-[#f14e06]">
                         <span id="selectedCategoryText" class="uppercase">Pilih Kategori</span>
                         <svg id="categoryArrow" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                         </svg>
                     </span>
                 </button>
-                <div id="categoryDropdown" class="hidden absolute left-0 mt-2 w-48 bg-white shadow-2xl rounded-2xl border border-[#f14e06]/10 overflow-hidden z-50">
+                <div id="categoryDropdown" class="hidden absolute left-0 mt-2 w-44 md:w-48 bg-white shadow-2xl rounded-2xl border border-[#f14e06]/10 overflow-hidden z-50">
                     <div id="categoryDropdownItems" class="p-2 flex flex-col">
                     </div>
                 </div>
@@ -58,22 +58,22 @@
 
             <div class="flex justify-center">
                 <a href="index.html" class="hover:opacity-80 transition">
-                    <img src="assets/img/logo-alepasta.png" alt="ALEPASTA" class="h-36 md:h-36 w-auto object-contain">
+                    <img src="assets/img/logo-alepasta.png" alt="ALEPASTA" class="h-20 sm:h-28 md:h-36 w-auto object-contain">
                 </a>
             </div>
 
             <div class="flex justify-end">
-                <button id="cartBtn" class="bg-[#f14e06] text-[#f1ece6] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:shadow-lg transition duration-300 focus:outline-none relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <button id="cartBtn" class="bg-[#f14e06] text-[#f1ece6] px-4 md:px-6 py-2.5 md:py-3 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:shadow-lg transition duration-300 focus:outline-none relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    KERANJANG (<span id="cartCount">0</span>)
+                    <span class="hidden sm:inline">KERANJANG</span> (<span id="cartCount">0</span>)
                 </button>
             </div>
         </nav>
 
-        <div class="w-full bg-[#f14e06] text-[#f1ece6] overflow-hidden py-3.5 select-none flex border-t border-[#f14e06]/10">
-            <div class="flex whitespace-nowrap animate-marquee gap-16 text-xs font-black uppercase tracking-[0.3em]">
+        <div class="w-full bg-[#f14e06] text-[#f1ece6] overflow-hidden py-3 select-none flex border-t border-[#f14e06]/10">
+            <div class="flex whitespace-nowrap animate-marquee gap-16 text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">
                 <div class="flex items-center gap-16">
                     <span>WHAT YA THINKING TODAY?</span>
                     <span>WHAT YA THINKING TODAY?</span>
@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    <main id="menuContainer" class="max-w-7xl mx-auto px-8 py-12">
+    <main id="menuContainer" class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
     </main>
 
     <div id="optionsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
@@ -181,9 +181,9 @@
     </div>
     <div id="cartOverlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden"></div>
 
-    <footer class="py-20 text-center flex flex-col items-center gap-6 border-t border-[#f14e06]/10 mt-20 select-none">
+    <footer class="py-12 md:py-20 text-center flex flex-col items-center gap-6 border-t border-[#f14e06]/10 mt-12 md:mt-20 select-none">
         
-        <div class="flex justify-center items-center gap-12 text-[#f14e06]">
+        <div class="flex justify-center items-center gap-8 md:gap-12 text-[#f14e06]">
             
             <a id="footerGrab" href="#" target="_blank" class="group transition" aria-label="GrabFood">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 fill-current transition group-hover:scale-110 duration-200" viewBox="0 0 24 24">
@@ -205,7 +205,7 @@
 
         </div>
 
-        <p class="text-[10px] font-black tracking-[0.3em] uppercase opacity-40 mt-2">© 2026 ALEPASTA — MADUKARA, BANJARNEGARA.</p>
+        <p class="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase opacity-40 mt-2 px-4">© 2026 ALEPASTA — MADUKARA, BANJARNEGARA.</p>
     </footer>
 
     <script>
@@ -216,7 +216,7 @@
             linkInstagram: "https://instagram.com/alepasta.co"
         };
 
-        // DATABASE DATA MENU (Sudah Berurutan Harga -> Alfabet)
+        // DATABASE DATA MENU (Sudah Berurutan Harga -> Alfabet & Berformat Huruf Kecil Semua)
         const menuCategories = {
             "Pasta Menu": [
                 { nama: "Aglio e Olio", harga: "10k", desc: "Pasta dengan minyak bawang putih gurih dengan taburan chili flakes.", img: "aglioeolio.png" },
@@ -232,7 +232,7 @@
             "Healthy Menu": [
                 { nama: "Simple Green", harga: "10k", desc: "Salad sayur segar dengan topping 1/2 telur rebus.", img: "simple-green.png" },
                 { nama: "Egg-tra Green", harga: "13k", desc: "Salad sayur segar dengan topping 1 telur rebus utuh.", img: "eggtra-green.png" },
-                { nama: "Signature Green", height: "15k", desc: "Salad sayur segar dengan topping ayam panggang (grill).", img: "signature-green.png" }
+                { nama: "Signature Green", harga: "15k", desc: "Salad sayur segar dengan topping ayam panggang (grill).", img: "signature-green.png" }
             ],
             "Side Menu": [
                 { nama: "Burger", harga: "10k", desc: "Burger ayam krispi dengan lumeran saus homemade khas Alepasta.", img: "burger.png" },
@@ -255,7 +255,7 @@
         document.getElementById('footerWA').href = `https://wa.me/${brandConfig.waNumber}`;
         document.getElementById('footerIG').href = brandConfig.linkInstagram;
 
-        // DYNAMIC RENDERING: Generate Dropdown Kategori & Grid Konten Menu
+        // DYNAMIC RENDERING RESPONSIVE ENGINE: Grid otomatis berubah 1 kolom di HP, 2 kolom di tablet, 3 kolom di laptop
         const dropdownContainer = document.getElementById('categoryDropdownItems');
         const menuContainer = document.getElementById('menuContainer');
 
@@ -273,7 +273,7 @@
 
             // Inject Komponen Section Menu
             const secEl = document.createElement('section');
-            secEl.className = "menu-section mb-24 transition-all duration-500 scroll-mt-64";
+            secEl.className = "menu-section mb-16 md:mb-24 transition-all duration-500 scroll-mt-36";
             secEl.id = slug;
 
             let itemsHtml = '';
@@ -286,27 +286,27 @@
                 const safeName = item.nama.replace(/'/g, "\\'");
 
                 itemsHtml += `
-                    <div onclick="openOptionsModal('${safeName}', ${numericPrice}, '${slug}')" class="group border-b border-[#f14e06]/10 pb-10 block cursor-pointer select-none">
-                        <div class="aspect-square bg-zinc-200 mb-6 overflow-hidden rounded-xl shadow-inner relative">
+                    <div onclick="openOptionsModal('${safeName}', ${numericPrice}, '${slug}')" class="group border-b border-[#f14e06]/10 pb-8 md:pb-10 block cursor-pointer select-none">
+                        <div class="aspect-square bg-zinc-200 mb-4 md:mb-6 overflow-hidden rounded-xl shadow-inner relative">
                             <img src="assets/img/${item.img}" alt="${item.nama}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                                <span class="bg-[#f1ece6] text-[#f14e06] text-xs font-black px-4 py-2 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition duration-300 uppercase tracking-wider">${hoverText}</span>
+                                <span class="bg-[#f1ece6] text-[#f14e06] text-[11px] md:text-xs font-black px-4 py-2 rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition duration-300 uppercase tracking-wider">${hoverText}</span>
                             </div>
                         </div>
-                        <div class="flex justify-between items-start mb-3">
-                            <h4 class="text-2xl font-black uppercase tracking-tight italic group-hover:text-zinc-800 transition">${item.nama}</h4>
-                            <span class="text-2xl font-black italic bg-[#f14e06] text-[#f1ece6] px-2 leading-none py-1 rounded">${item.harga}</span>
+                        <div class="flex justify-between items-start mb-2 md:mb-3">
+                            <h4 class="text-xl md:text-2xl font-black uppercase tracking-tight italic group-hover:text-zinc-800 transition">${item.nama}</h4>
+                            <span class="text-xl md:text-2xl font-black italic bg-[#f14e06] text-[#f1ece6] px-2 leading-none py-1 rounded">${item.harga}</span>
                         </div>
-                        <p class="text-sm opacity-70 leading-relaxed font-semibold text-zinc-700">${item.desc}</p>
+                        <p class="text-xs md:text-sm opacity-70 leading-relaxed font-semibold text-zinc-700">${item.desc}</p>
                     </div>`;
             });
 
             secEl.innerHTML = `
-                <div class="flex items-center gap-4 mb-12">
-                    <h3 class="text-4xl font-black uppercase italic tracking-tighter">${catName}</h3>
+                <div class="flex items-center gap-4 mb-8 md:mb-12">
+                    <h3 class="text-2xl md:text-4xl font-black uppercase italic tracking-tighter">${catName}</h3>
                     <div class="h-[2px] flex-grow bg-[#f14e06] opacity-20"></div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">${itemsHtml}</div>`;
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-12 gap-y-10 md:gap-y-16">${itemsHtml}</div>`;
             
             menuContainer.appendChild(secEl);
         });
