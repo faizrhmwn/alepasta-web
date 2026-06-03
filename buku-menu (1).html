@@ -311,6 +311,13 @@
         /* ── PRINT ── */
         @media print {
             @page { size: A4 landscape; margin: 0; }
+
+            *, *::before, *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
             body { background: white; }
             #screenUI { display: none !important; }
             .page-wrap { padding: 0; gap: 0; align-items: stretch; }

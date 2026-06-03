@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Menu Alepasta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #f14e06;
+            --cream: #f1ece6;
+            --dark: #1a1a1a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #c8c0b8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px;
+            gap: 16px;
+        }
+
+        /* ── SCREEN UI ── */
+        #screenUI {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+        .btn-primary { background: var(--orange); color: var(--cream); }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(241,78,6,0.4); }
+        .btn-secondary { background: white; color: var(--dark); }
+        .btn-secondary:hover { background: var(--dark); color: white; }
+
+        /* ── PAGE ── */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: var(--cream);
+            border-radius: 4px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+            overflow: hidden;
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        /* Left orange strip */
+        .strip {
+            width: 48px;
+            background: var(--orange);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+            flex-shrink: 0;
+        }
+        .strip-brand {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0.8;
+        }
+        .strip-year {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--cream);
+            opacity: 0.4;
+        }
+
+        /* Main body */
+        .body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 20px 16px 16px;
+            overflow: hidden;
+            gap: 10px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--orange);
+            flex-shrink: 0;
+        }
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            color: var(--orange);
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+        .header-sub {
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--dark);
+            opacity: 0.35;
+        }
+        .header-info {
+            text-align: right;
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--dark);
+            opacity: 0.3;
+            line-height: 1.8;
+        }
+
+        /* Categories row */
+        .cats-row {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Single category column */
+        .cat-col {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+            min-width: 0;
+        }
+        .cat-label {
+            font-size: 7px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--orange);
+            border-bottom: 1px solid var(--orange);
+            padding-bottom: 4px;
+            opacity: 0.7;
+            flex-shrink: 0;
+        }
+        .cat-items {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Item card */
+        .item {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+            position: relative;
+        }
+        .item-img {
+            flex: 1;
+            overflow: hidden;
+            background: #e0d8d0;
+            min-height: 0;
+        }
+        .item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .item-info {
+            padding: 4px 6px 5px;
+            flex-shrink: 0;
+            background: white;
+        }
+        .item-name {
+            font-size: 7.5px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            color: var(--dark);
+            letter-spacing: -0.2px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .item-price {
+            font-size: 8px;
+            font-weight: 900;
+            color: var(--orange);
+            margin-top: 1px;
+        }
+        .item-bs {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            background: #fbbf24;
+            color: #78350f;
+            font-size: 5px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* ── PRINT ── */
+        @media print {
+            @page { size: A4 landscape; margin: 0; }
+            *, *::before, *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            body { background: white; padding: 0; }
+            #screenUI { display: none !important; }
+            .page {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="screenUI">
+    <a href="index.html" class="btn btn-secondary">← Kembali</a>
+    <button onclick="window.print()" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        Print / Save PDF
+    </button>
+</div>
+
+<div class="page" id="thePage">
+    <div class="strip">
+        <div class="strip-brand">Alepasta</div>
+        <div class="strip-year">2026</div>
+    </div>
+    <div class="body">
+        <div class="header">
+            <div>
+                <div class="header-title">Alepasta</div>
+                <div class="header-sub">Your Daily Homemade Pasta</div>
+            </div>
+            <div class="header-info">
+                0813-9010-8787<br>
+                @alepasta.co
+            </div>
+        </div>
+        <div class="cats-row" id="catsRow"></div>
+    </div>
+</div>
+
+<script>
+    const menuCategories = {
+        "Pasta": [
+            { nama: "Aglio e Olio", harga: "10k", img: "aglioeolio.png" },
+            { nama: "Alfredo", harga: "10k", img: "alfredo.png" },
+            { nama: "Bolognese", harga: "10k", img: "bolognese.png" },
+            { nama: "Mac & Cheese", harga: "10k", img: "macncheese.png" }
+        ],
+        "Rice": [
+            { nama: "Alepasta Bowl", harga: "12k", img: "alepasta-bowl.png" },
+            { nama: "Bolognese Bowl", harga: "12k", img: "bolognese-bowl.png" },
+            { nama: "Curry Bowl", harga: "12k", img: "curry-bowl.png" }
+        ],
+        "Salad": [
+            { nama: "Simple Green", harga: "10k", img: "simple-green.png" },
+            { nama: "Egg-tra Green", harga: "13k", img: "eggtra-green.png" },
+            { nama: "Signature Green", harga: "15k", img: "signature-green.png" }
+        ],
+        "Side": [
+            { nama: "Burger", harga: "10k", img: "burger.png" },
+            { nama: "Chicken Wrap", harga: "12k", img: "wrap.png" },
+            { nama: "Bolognese Fries", harga: "15k", img: "bolognese-fries.png" },
+            { nama: "Burger w/Fries", harga: "15k", img: "burgerwfries.png" },
+            { nama: "Cheesy Fries", harga: "15k", img: "cheesy-fries.png" },
+            { nama: "Combo", harga: "15k", img: "combo.png" }
+        ],
+        "Beverage": [
+            { nama: "Blue Ocean Lemon", harga: "7k", img: "blue-ocean.png" },
+            { nama: "Lemon Tea", harga: "7k", img: "lemon-tea.png" },
+            { nama: "Matcha", harga: "9k", img: "matcha.png" },
+            { nama: "Milo", harga: "9k", img: "milo.png" }
+        ],
+        "A La Carte": [
+            { nama: "Ayam Crispy", harga: "6k", img: "ayam-carte.png" },
+            { nama: "Alepasta Sauce", harga: "3k", img: "alepasta-saus.png" }
+        ]
+    };
+
+    const bestSellers = ["Mac & Cheese", "Curry Bowl", "Signature Green", "Burger", "Milo"];
+    const row = document.getElementById('catsRow');
+
+    Object.entries(menuCategories).forEach(([catName, items]) => {
+        const col = document.createElement('div');
+        col.className = 'cat-col';
+
+        const itemsHtml = items.map(item => {
+            const isBs = bestSellers.includes(item.nama);
+            return `
+                <div class="item">
+                    <div class="item-img">
+                        <img src="assets/img/${item.img}" alt="${item.nama}">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-name">${item.nama}</div>
+                        <div class="item-price">${item.harga}</div>
+                    </div>
+                    ${isBs ? '<div class="item-bs">★ BS</div>' : ''}
+                </div>`;
+        }).join('');
+
+        col.innerHTML = `
+            <div class="cat-label">${catName}</div>
+            <div class="cat-items">${itemsHtml}</div>`;
+
+        row.appendChild(col);
+    });
+</script>
+</body>
+</html>
