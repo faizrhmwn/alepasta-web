@@ -26,11 +26,16 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #f1ece6; 
+            background-color: #f1ece6;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Cg%20transform%3D%22translate%2850%2C55%29%22%20opacity%3D%220.12%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%22-14%22%20rx%3D%2218%22%20ry%3D%2210%22%20fill%3D%22%23f14e06%22%2F%3E%3Cellipse%20cx%3D%22-6%22%20cy%3D%22-18%22%20rx%3D%222%22%20ry%3D%221.3%22%20fill%3D%22%23c73c02%22%2F%3E%3Cellipse%20cx%3D%223%22%20cy%3D%22-20%22%20rx%3D%222%22%20ry%3D%221.3%22%20fill%3D%22%23c73c02%22%2F%3E%3Cellipse%20cx%3D%2210%22%20cy%3D%22-17%22%20rx%3D%222%22%20ry%3D%221.3%22%20fill%3D%22%23c73c02%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%22-5%22%20rx%3D%2220%22%20ry%3D%224%22%20fill%3D%22%237ab648%22%2F%3E%3Crect%20x%3D%22-18%22%20y%3D%22-1%22%20width%3D%2236%22%20height%3D%227%22%20rx%3D%223%22%20fill%3D%22%237a3b10%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%2210%22%20rx%3D%2218%22%20ry%3D%227%22%20fill%3D%22%23f14e06%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28150%2C145%29%22%20opacity%3D%220.12%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%225%22%20rx%3D%2222%22%20ry%3D%229%22%20fill%3D%22%23f14e06%22%2F%3E%3Cpath%20d%3D%22M-14%2C-6%20Q-4%2C3%205%2C-4%20Q14%2C3%2017%2C-2%22%20fill%3D%22none%22%20stroke%3D%22%23f1ece6%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M-13%2C-1%20Q-3%2C6%206%2C-1%20Q13%2C5%2016%2C1%22%20fill%3D%22none%22%20stroke%3D%22%23f1ece6%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22-22%22%20x2%3D%220%22%20y2%3D%22-2%22%20stroke%3D%22%23c73c02%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%3Cline%20x1%3D%22-4%22%20y1%3D%22-22%22%20x2%3D%22-4%22%20y2%3D%22-14%22%20stroke%3D%22%23c73c02%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%2F%3E%3Cline%20x1%3D%224%22%20y1%3D%22-22%22%20x2%3D%224%22%20y2%3D%22-14%22%20stroke%3D%22%23c73c02%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%2F%3E%3Cline%20x1%3D%22-4%22%20y1%3D%22-14%22%20x2%3D%224%22%20y2%3D%22-14%22%20stroke%3D%22%23c73c02%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
             color: #f14e06; 
         }
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         #toast {
@@ -55,12 +60,12 @@
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         @media print {
-            /* Hide everything except menu content */
             .sticky, #cartSidebar, #cartOverlay, #optionsModal, footer, #toast, #downloadBtn {
                 display: none !important;
             }
             body {
                 background-color: #fff !important;
+                background-image: none !important;
                 color: #1a1a1a !important;
             }
             .menu-section {
@@ -68,7 +73,6 @@
                 margin-bottom: 32px !important;
                 page-break-inside: avoid;
             }
-            /* Show all sections when printing */
             .menu-section.hidden {
                 display: block !important;
             }
@@ -76,7 +80,6 @@
                 padding: 0 !important;
                 max-width: 100% !important;
             }
-            /* Print header */
             #printHeader {
                 display: flex !important;
                 flex-direction: column;
@@ -103,7 +106,6 @@
                 opacity: 0.5;
                 margin-top: 4px;
             }
-            /* Grid: 3 columns on print */
             .print-grid {
                 display: grid !important;
                 grid-template-columns: repeat(3, 1fr);
@@ -113,13 +115,8 @@
                 border-bottom: 1px solid #f14e06 !important;
                 padding-bottom: 12px !important;
             }
-            .menu-card img {
-                display: none !important;
-            }
-            .menu-card-img-placeholder {
-                display: none !important;
-            }
-            /* Section title */
+            .menu-card img { display: none !important; }
+            .menu-card-img-placeholder { display: none !important; }
             .section-title-bar {
                 display: flex;
                 align-items: center;
@@ -127,27 +124,11 @@
                 margin-bottom: 16px;
                 page-break-before: auto;
             }
-            .section-title-bar h3 {
-                font-size: 20px !important;
-                color: #f14e06 !important;
-            }
-            .section-title-bar div {
-                height: 1px !important;
-                background: #f14e06 !important;
-                opacity: 0.3;
-                flex-grow: 1;
-            }
-            /* Item name & price */
-            .item-name {
-                font-size: 13px !important;
-            }
-            .item-price {
-                font-size: 13px !important;
-            }
-            .item-desc {
-                font-size: 10px !important;
-            }
-            /* Best seller badge in print */
+            .section-title-bar h3 { font-size: 20px !important; color: #f14e06 !important; }
+            .section-title-bar div { height: 1px !important; background: #f14e06 !important; opacity: 0.3; flex-grow: 1; }
+            .item-name { font-size: 13px !important; }
+            .item-price { font-size: 13px !important; }
+            .item-desc { font-size: 10px !important; }
             .best-seller-print {
                 display: inline-block;
                 background: #fbbf24;
@@ -160,7 +141,6 @@
                 letter-spacing: 1px;
                 margin-left: 4px;
             }
-            /* Footer info */
             #printFooter {
                 display: block !important;
                 text-align: center;
@@ -415,7 +395,6 @@
         const dropdownContainer = document.getElementById('categoryDropdownItems');
         const menuContainer = document.getElementById('menuContainer');
 
-        // ── "All" dropdown item ──────────────────────────────────────────────
         const allDropEl = document.createElement('a');
         allDropEl.href = '#all';
         allDropEl.className = "category-filter px-4 py-3 text-sm font-extrabold text-[#f14e06] hover:bg-[#f14e06] hover:text-white rounded-xl transition duration-200 uppercase cursor-pointer";
@@ -426,7 +405,6 @@
 
         const bestSellers = ["Mac & Cheese", "Curry Bowl", "Signature Green", "Burger", "Milo"];
 
-        // ── "All" section: flat list of every item across all categories ────
         const allSection = document.createElement('section');
         allSection.className = 'menu-section mb-16 md:mb-24 transition-all duration-500';
         allSection.id = 'all';
@@ -471,7 +449,6 @@
 
         menuContainer.appendChild(allSection);
 
-        // ── Per-category sections (hidden by default) ─────────────────────
         Object.keys(menuCategories).forEach(catName => {
             const slug = catName.toLowerCase().replace(/\s+/g, '-');
             
@@ -582,7 +559,6 @@
             } 
         });
 
-        // MODAL ENGINE
         function openOptionsModal(name, basePrice, categorySlug) {
             currentSelectedMenu = { name: name, basePrice: basePrice, category: categorySlug };
             document.getElementById('modalMenuName').innerText = name;
@@ -730,7 +706,6 @@
         }
 
         function downloadMenuPDF() {
-            // Show all sections temporarily for print
             const sections = document.querySelectorAll('.menu-section');
             const hiddenSections = [];
             sections.forEach(sec => {
@@ -739,11 +714,7 @@
                     sec.classList.remove('hidden');
                 }
             });
-
-            // Trigger print dialog (user saves as PDF)
             window.print();
-
-            // Restore hidden sections after print dialog closes
             setTimeout(() => {
                 hiddenSections.forEach(sec => sec.classList.add('hidden'));
             }, 1000);
@@ -773,7 +744,7 @@
             toggleCart();
         }
     </script>
-    <!-- Print-only footer -->
+
     <div id="printFooter">
         © 2026 Alepasta · Madukara, Banjarnegara · Instagram: @alepasta.co
     </div>
