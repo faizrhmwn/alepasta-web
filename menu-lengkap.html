@@ -25,8 +25,8 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: #b0a8a0;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
             padding: 20px;
             min-height: 100vh;
         }
@@ -64,6 +64,8 @@
         .tv-container {
             width: 1920px;
             height: 1080px;
+            min-width: 1920px;
+            min-height: 1080px;
             background: var(--cream);
             position: relative;
             overflow: hidden;
@@ -104,38 +106,41 @@
             text-shadow: 2px 2px 0 #1a1a1a;
         }
 
-        /* ── MENU BODY ── */
         .menu-body {
             flex: 1;
-            padding: 25px 40px; 
+            padding: 20px 30px; 
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            min-height: 0; 
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 Kolom merata sempurna */
-            column-gap: 25px;
-            height: 100%;
+            grid-template-columns: 2fr 2fr 2fr 3fr;
+            gap: 25px;
+            flex: 1;
+            min-height: 0;
         }
 
-        /* Category block */
         .cat-block {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            min-width: 0; 
+            min-height: 0;
         }
+
         .cat-title-row {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
         }
         .cat-title {
             font-size: 18px;
             font-weight: 900;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--red);
             white-space: nowrap;
@@ -150,8 +155,10 @@
         /* Items row */
         .items-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Selalu 2 kolom per kategori */
             gap: 15px;
+            flex: 1;
+            min-height: 0;
+            grid-auto-rows: minmax(0, 1fr);
         }
 
         /* Item card */
@@ -163,42 +170,44 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            flex: 1;
+            min-height: 0;
         }
         .item-photo {
+            flex: 1;
+            min-height: 0;
             width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
             background: #e8e4db;
         }
         .item-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
             display: block;
         }
         .item-meta {
-            padding: 10px 8px; 
+            padding: 8px 10px; 
             text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-shrink: 0;
         }
         .item-name {
             font-family: 'Prachason Neue Mon', 'Plus Jakarta Sans', sans-serif;
-            font-size: 14px; 
+            font-size: 13px; 
             font-weight: 800;
             text-transform: capitalize; 
             color: var(--dark);
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            height: 34px; 
+            height: 30px; 
         }
         .item-price {
             font-size: 16px;
@@ -220,39 +229,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* ── EXTRA TOPPING BOX ── */
-        .extra-topping-box {
-            background: rgba(218, 41, 28, 0.05);
-            border: 2px dashed rgba(218, 41, 28, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 0px;
-        }
-        .extra-topping-title {
-            font-size: 13px;
-            font-weight: 900;
-            color: var(--red);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .extra-topping-items {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .et-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--dark);
-        }
-        .et-price {
-            color: var(--red);
-            font-weight: 900;
-        }
+        /* ── KOTAK TOPPING DIHAPUS ── */
 
         /* ── FOOTER ── */
         .footer {
@@ -386,6 +363,7 @@
         ],
         "A La Carte": [
             { nama: "Ayam Crispy", harga: "6k", img: "ayam-carte.png" },
+            { nama: "Smoked Beef", harga: "3k", img: "smoked-beef.png" },
             { nama: "Alepasta Sauce", harga: "3k", img: "alepasta-sauce.png" },
             { nama: "Cheese Sauce", harga: "3k", img: "cheese-sauce.png" },
             { nama: "Spicy Mayo", harga: "3k", img: "spicy-mayo.png" }
@@ -395,19 +373,16 @@
     const bestSellers = ["Mac & Cheese", "Curry Bowl", "Signature Green", "Burger", "Milo"];
     const body = document.getElementById('menuBody');
 
-    // 6 Kolom untuk 6 Kategori (Pas!)
-    const columns = Array.from({length: 6}, () => document.createElement('div'));
-    columns.forEach((col) => {
-        col.style.display = 'flex';
-        col.style.flexDirection = 'column';
-        col.style.gap = '15px';
-    });
+    // 4 Custom Columns for perfect 3-row layout
+    const blocks = [
+        { title: 'PASTA', cols: 2, items: menuCategories['Pasta'] },
+        { title: 'RICE & SALAD', cols: 2, items: [...menuCategories['Rice'], ...menuCategories['Salad']] },
+        { title: 'SIDE', cols: 2, items: menuCategories['Side'] },
+        { title: 'BEV & OTHER', cols: 3, items: [...menuCategories['Beverage'], ...menuCategories['A La Carte']] }
+    ];
 
-    Object.entries(menuCategories).forEach(([catName, items]) => {
-        const block = document.createElement('div');
-        block.className = 'cat-block';
-
-        const cardsHtml = items.map((item) => {
+    blocks.forEach(block => {
+        let cardsHtml = block.items.map(item => {
             const isBs = bestSellers.includes(item.nama);
             return `
                 <div class="item-card">
@@ -422,43 +397,21 @@
                 </div>`;
         }).join('');
 
-        block.innerHTML = `
+        // Kotak Topping dihapus
+
+        const colDiv = document.createElement('div');
+        colDiv.className = 'cat-block';
+        colDiv.innerHTML = `
             <div class="cat-title-row">
-                <div class="cat-title">${catName}</div>
+                <div class="cat-title">${block.title}</div>
                 <div class="cat-line"></div>
             </div>
-            <div class="items-row">${cardsHtml}</div>`;
-        
-        if (catName === 'Pasta') {
-            block.innerHTML += `
-            <div class="extra-topping-box">
-                <div class="extra-topping-title">Extra Topping</div>
-                <div class="extra-topping-items">
-                    <div class="et-item">
-                        <span>Ayam Crispy</span>
-                        <span class="et-price">6k</span>
-                    </div>
-                    <div class="et-item">
-                        <span>Smoked Beef (2 pcs)</span>
-                        <span class="et-price">3k</span>
-                    </div>
-                </div>
-            </div>`;
-            columns[0].appendChild(block);
-        } else if (catName === 'Rice') {
-            columns[1].appendChild(block);
-        } else if (catName === 'Salad') {
-            columns[2].appendChild(block);
-        } else if (catName === 'Side') {
-            columns[3].appendChild(block);
-        } else if (catName === 'Beverage') {
-            columns[4].appendChild(block);
-        } else if (catName === 'A La Carte') {
-            columns[5].appendChild(block);
-        }
+            <div class="items-row" style="grid-template-columns: repeat(${block.cols}, 1fr);">
+                ${cardsHtml}
+            </div>
+        `;
+        body.appendChild(colDiv);
     });
-
-    columns.forEach(col => body.appendChild(col));
 
     function downloadPNG() {
         if (window.location.protocol === 'file:') {
