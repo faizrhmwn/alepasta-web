@@ -127,44 +127,44 @@
             object-fit: cover;
         }
         
-        /* 1. Bolognese Pasta (Kiri Atas) */
+        /* 1. Bolognese Pasta */
         .food-item:nth-child(1) {
             top: 50px;
-            left: 80px;
-            width: 480px;
-            height: 480px;
+            left: 100px;
+            width: 420px;
+            height: 420px;
             z-index: 2;
+            transform: rotate(-8deg);
+        }
+        
+        /* 2. Mac & Cheese */
+        .food-item:nth-child(2) {
+            top: 80px;
+            right: 100px;
+            width: 420px;
+            height: 420px;
+            z-index: 3;
+            transform: rotate(10deg);
+        }
+        
+        /* 3. Burger */
+        .food-item:nth-child(3) {
+            top: 400px;
+            left: 150px;
+            width: 450px;
+            height: 450px;
+            z-index: 4;
             transform: rotate(-5deg);
         }
         
-        /* 2. Mac & Cheese (Kanan Atas) */
-        .food-item:nth-child(2) {
-            top: 100px;
-            right: 80px;
-            width: 460px;
-            height: 460px;
-            z-index: 3;
-            transform: rotate(4deg);
-        }
-        
-        /* 3. Burger (Kiri Bawah) */
-        .food-item:nth-child(3) {
-            top: 500px;
-            left: 120px;
-            width: 460px;
-            height: 460px;
-            z-index: 4;
-            transform: rotate(5deg);
-        }
-        
-        /* 4. Hotdog Bolognese (Kanan Bawah) */
+        /* 4. Hotdog Bolognese (Paling besar & di depan) */
         .food-item:nth-child(4) {
-            top: 520px;
-            right: 100px;
-            width: 480px;
-            height: 480px;
+            top: 450px;
+            right: 120px;
+            width: 550px;
+            height: 550px;
             z-index: 5;
-            transform: rotate(-4deg);
+            transform: rotate(6deg);
         }
 
         /* Bottom Section / Footer */
@@ -193,11 +193,12 @@
             font-weight: 800;
             color: white;
             letter-spacing: 1px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Shadow hitam tebal agar teks putih tetap terbaca walau kena border putih */
         }
         .social-item img {
             width: 70px;
             height: 70px;
-            filter: brightness(0) invert(1);
+            filter: brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
         }
         
         /* Price Badge */
