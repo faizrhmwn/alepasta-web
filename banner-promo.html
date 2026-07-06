@@ -19,9 +19,6 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: #b0a8a0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
             padding: 40px;
             min-height: 100vh;
         }
@@ -56,6 +53,7 @@
 
         /* ── BANNER ── */
         .banner {
+            margin: 0 auto;
             width: 1200px;
             height: 1800px; /* Rasio 60x90cm / 2:3 */
             background-color: var(--red);
@@ -90,7 +88,7 @@
             color: var(--yellow);
             text-shadow: 3px 3px 0 #1a1a1a;
             letter-spacing: 2px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         .slogan {
             font-size: 60px;
@@ -110,51 +108,59 @@
         .food-showcase {
             flex: 1;
             position: relative;
-            margin-top: 40px;
             z-index: 5;
         }
         .food-item {
             position: absolute;
-            /* Drop shadow yang kuat biar makanannya pop-out dari background merah */
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.7));
+            border-radius: 50%;
+            border: 20px solid var(--cream);
+            background: var(--cream);
+            overflow: hidden;
+            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.5));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .food-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         /* Bolognese Pasta di atas kiri */
         .food-item:nth-child(1) {
-            top: 20px;
-            left: 0px;
-            width: 700px;
-            transform: rotate(-8deg);
-            z-index: 3;
+            top: -20px;
+            left: 80px;
+            width: 550px;
+            height: 550px;
+            z-index: 2;
+            transform: rotate(-5deg);
         }
         
         /* Mac & Cheese di tengah kanan */
         .food-item:nth-child(2) {
             top: 250px;
-            right: 0px;
-            width: 700px;
+            right: 80px;
+            width: 550px;
+            height: 550px;
+            z-index: 3;
             transform: rotate(5deg);
-            z-index: 2;
         }
         
-        /* Hotdog Bolognese JUMBO di bawah kiri nembus tengah */
+        /* Hotdog Bolognese JUMBO di bawah tengah */
         .food-item:nth-child(3) {
-            top: 600px;
-            left: 100px;
-            width: 900px;
-            transform: rotate(-4deg);
+            top: 550px;
+            left: 50%;
+            margin-left: -325px; /* Center (width/2) */
+            width: 650px;
+            height: 650px;
             z-index: 4;
-        }
-        
-        .food-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+            transform: rotate(-2deg);
         }
 
         /* Bottom Section / Footer */
         .footer-section {
-            padding: 40px 60px 80px;
+            padding: 30px 60px 60px;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -166,6 +172,7 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
+            margin-bottom: 10px;
         }
         .social-item {
             display: flex;
@@ -179,25 +186,24 @@
         .social-item img {
             width: 70px;
             height: 70px;
-            /* Filter ini mengubah icon hitam jadi putih */
             filter: brightness(0) invert(1);
         }
         
         /* Price Badge */
         .price-badge {
             text-align: right;
-            transform: rotate(-5deg);
+            transform: rotate(-3deg);
         }
         .price-text-1 {
             font-family: 'Knewave', cursive;
-            font-size: 75px;
+            font-size: 65px;
             color: white;
             text-shadow: 4px 4px 0 #1a1a1a;
             line-height: 1;
         }
         .price-text-2 {
             font-family: 'Knewave', cursive;
-            font-size: 180px;
+            font-size: 150px;
             color: var(--yellow);
             text-shadow: 6px 6px 0 #1a1a1a;
             line-height: 1;
@@ -217,7 +223,7 @@
             opacity: 0.8;
         }
         .star-1 { top: 380px; left: 150px; }
-        .star-2 { bottom: 420px; right: 100px; }
+        .star-2 { bottom: 450px; right: 100px; }
         .star-3 { top: 150px; right: 150px; font-size: 80px; }
 
     </style>
