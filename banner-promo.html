@@ -112,11 +112,11 @@
         }
         .food-item {
             position: absolute;
-            border-radius: 50%;
-            border: 20px solid var(--cream);
+            border: 20px solid white; /* Polaroid style border */
+            border-radius: 20px;
             background: var(--cream);
             overflow: hidden;
-            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.5));
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -127,35 +127,44 @@
             object-fit: cover;
         }
         
-        /* Bolognese Pasta di atas kiri */
+        /* 1. Bolognese Pasta (Kiri Atas) */
         .food-item:nth-child(1) {
-            top: -20px;
+            top: 50px;
             left: 80px;
-            width: 550px;
-            height: 550px;
+            width: 480px;
+            height: 480px;
             z-index: 2;
             transform: rotate(-5deg);
         }
         
-        /* Mac & Cheese di tengah kanan */
+        /* 2. Mac & Cheese (Kanan Atas) */
         .food-item:nth-child(2) {
-            top: 250px;
+            top: 100px;
             right: 80px;
-            width: 550px;
-            height: 550px;
+            width: 460px;
+            height: 460px;
             z-index: 3;
+            transform: rotate(4deg);
+        }
+        
+        /* 3. Burger (Kiri Bawah) */
+        .food-item:nth-child(3) {
+            top: 500px;
+            left: 120px;
+            width: 460px;
+            height: 460px;
+            z-index: 4;
             transform: rotate(5deg);
         }
         
-        /* Hotdog Bolognese JUMBO di bawah tengah */
-        .food-item:nth-child(3) {
-            top: 550px;
-            left: 50%;
-            margin-left: -325px; /* Center (width/2) */
-            width: 650px;
-            height: 650px;
-            z-index: 4;
-            transform: rotate(-2deg);
+        /* 4. Hotdog Bolognese (Kanan Bawah) */
+        .food-item:nth-child(4) {
+            top: 520px;
+            right: 100px;
+            width: 480px;
+            height: 480px;
+            z-index: 5;
+            transform: rotate(-4deg);
         }
 
         /* Bottom Section / Footer */
@@ -172,7 +181,9 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 20;
         }
         .social-item {
             display: flex;
@@ -193,6 +204,8 @@
         .price-badge {
             text-align: right;
             transform: rotate(-3deg);
+            position: relative;
+            z-index: 20;
         }
         .price-text-1 {
             font-family: 'Knewave', cursive;
@@ -260,7 +273,9 @@
             <img src="assets/img/macncheese.png" alt="Mac & Cheese">
         </div>
         <div class="food-item">
-            <!-- Jagoan Baru! -->
+            <img src="assets/img/burger.png" alt="Burger">
+        </div>
+        <div class="food-item">
             <img src="assets/img/bolognese-dog.png" alt="Bolognese Dog">
         </div>
     </div>
