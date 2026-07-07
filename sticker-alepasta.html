@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Stiker Alepasta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800;1,900&family=Knewave&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --red: #da291c;
+            --cream: #efebe1;
+            --yellow: #ffc72c;
+            --dark: #1a1a1a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #b0a8a0;
+            padding: 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ── SCREEN UI ── */
+        #screenUI {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 30px;
+            border-radius: 999px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            text-decoration: none;
+        }
+        .btn-primary { background: var(--red); color: var(--cream); }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* ── STICKER ── */
+        .sticker {
+            width: 2000px;
+            height: 2000px;
+            background-color: var(--red);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: 'Knewave', cursive;
+            font-size: 380px;
+            color: var(--cream);
+            text-shadow: 18px 18px 0 var(--dark);
+            letter-spacing: 12px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            transform: rotate(-3deg);
+        }
+
+        .tagline {
+            font-family: 'Knewave', cursive;
+            font-size: 100px;
+            color: var(--yellow);
+            letter-spacing: 3px;
+            transform: rotate(-3deg);
+        }
+
+        /* Footer Section */
+        .footer {
+            height: 280px;
+            background-color: var(--cream);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 120px;
+        }
+
+        .social-group {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .social-group img {
+            width: 130px;
+            height: 130px;
+            filter: brightness(0); /* Make icons black */
+        }
+
+        .social-text {
+            font-size: 80px;
+            font-weight: 900;
+            color: var(--dark);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="screenUI">
+        <a href="index.html" class="btn" style="background: white; color: var(--dark);">KEMBALI KE HOME</a>
+        <button class="btn btn-primary" onclick="downloadSticker()" id="downloadBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            DOWNLOAD STIKER (6000x6000px)
+        </button>
+    </div>
+
+    <div class="sticker" id="stickerTarget">
+        <div class="content">
+            <div class="brand">Alepasta</div>
+            <div class="tagline">Your Daily Homemade Pasta</div>
+        </div>
+        <div class="footer">
+            <div class="social-group">
+                <!-- Using placeholder for Instagram since we use filter: brightness(0) to make it black -->
+                <img src="assets/img/ig-icon.png" alt="Instagram" onerror="this.src='https://cdn-icons-png.flaticon.com/512/174/174855.png'">
+                <div class="social-text">alepasta.co</div>
+            </div>
+            <div class="social-group">
+                <!-- Using placeholder for WhatsApp -->
+                <img src="assets/img/wa-icon.png" alt="WhatsApp" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1384/1384023.png'">
+                <div class="social-text">0813-9010-8787</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadSticker() {
+            const btn = document.getElementById('downloadBtn');
+            const target = document.getElementById('stickerTarget');
+            
+            btn.innerHTML = 'RENDERING... (MOHON TUNGGU)';
+            btn.style.opacity = '0.7';
+            btn.style.pointerEvents = 'none';
+
+            // Scale 3 to get 6000x6000 from 2000x2000
+            html2canvas(target, {
+                scale: 3, 
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#da291c'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'alepasta-sticker-6000px.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+                
+                btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            }).catch(err => {
+                console.error('Error generating image:', err);
+                alert('Gagal mendownload stiker. Pastikan buka file html melalui Localhost/Live Server.');
+                btn.innerHTML = 'COBA LAGI';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            });
+        }
+    </script>
+</body>
+</html>
