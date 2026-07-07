@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800;1,900&family=Knewave&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.2.0/dom-to-image-more.min.js"></script>
     <style>
         :root {
             --red: #da291c;
@@ -58,8 +58,6 @@
             height: 2000px;
             background-color: var(--red);
             position: relative;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
@@ -77,7 +75,11 @@
         .deco-4 { top: 1380px; left: 1620px; width: 260px; transform: rotate(25deg); }
 
         .content {
-            flex: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2000px;
+            height: 1720px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -107,6 +109,10 @@
 
         /* Footer Section */
         .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 2000px;
             height: 280px;
             background-color: var(--cream);
             display: flex;
@@ -149,9 +155,7 @@
         </button>
     </div>
 
-    <!-- JURUS PAMUNGKAS: Wrapper untuk mengecilkan ukuran secara visual saat akan di-render html2canvas agar TIDAK ADA ELEMEN yang dicull/dipotong -->
-    <div id="stickerWrapper" style="transform-origin: top left;">
-        <div class="sticker" id="stickerTarget">
+    <div class="sticker" id="stickerTarget">
         <!-- Custom Vector Decorations: Macaroni, Spaghetti, Burger, Hotdog -->
         
         <!-- 1. Macaroni -->
@@ -200,58 +204,41 @@
                 <div class="social-text">0813-9010-8787</div>
             </div>
         </div>
-        </div>
     </div>
 
     <script>
         function downloadSticker() {
             const btn = document.getElementById('downloadBtn');
             const target = document.getElementById('stickerTarget');
-            const wrapper = document.getElementById('stickerWrapper');
             
             btn.innerHTML = 'RENDERING... (MOHON TUNGGU)';
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
 
-            // TRIK CULLING HTML2CANVAS:
-            // Kecilkan wrapper sehingga ukuran asli 2000x2000 muat di dalam layar (misal 400x400)
-            // html2canvas memotong elemen berdasarkan koordinat layar asli.
-            // Jika elemen muat di layar, tidak akan dipotong!
-            wrapper.style.transform = 'scale(0.2)';
-
-            // Gulir ke atas agar seluruh area 400x400 masuk layar
-            window.scrollTo(0, 0);
-
-            // Beri waktu sejenak agar browser me-render ukuran baru
-            setTimeout(() => {
-                html2canvas(target, {
-                    scale: 3, // Hasil akhir tetap 2000 x 3 = 6000px, parent transform diabaikan saat menggambar target!
-                    useCORS: true,
-                    allowTaint: true,
-                    backgroundColor: '#da291c',
-                    scrollX: 0,
-                    scrollY: 0
-                }).then(canvas => {
-                    // Kembalikan ukuran
-                    wrapper.style.transform = 'none';
-
-                    const link = document.createElement('a');
-                    link.download = 'alepasta-sticker-6000px.png';
-                    link.href = canvas.toDataURL('image/png', 1.0);
-                    link.click();
-                    
-                    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
-                    btn.style.opacity = '1';
-                    btn.style.pointerEvents = 'auto';
-                }).catch(err => {
-                    wrapper.style.transform = 'none';
-                    console.error('Error generating image:', err);
-                    alert('Gagal mendownload stiker.');
-                    btn.innerHTML = 'COBA LAGI';
-                    btn.style.opacity = '1';
-                    btn.style.pointerEvents = 'auto';
-                });
-            }, 100);
+            var scale = 3;
+            domtoimage.toPng(target, {
+                width: 2000 * scale,
+                height: 2000 * scale,
+                style: {
+                    transform: 'scale(' + scale + ')',
+                    transformOrigin: 'top left'
+                }
+            }).then(function (dataUrl) {
+                const link = document.createElement('a');
+                link.download = 'alepasta-sticker-6000px.png';
+                link.href = dataUrl;
+                link.click();
+                
+                btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            }).catch(function (err) {
+                console.error('Error generating image:', err);
+                alert('Gagal mendownload stiker.');
+                btn.innerHTML = 'COBA LAGI';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            });
         }
     </script>
 </body>
