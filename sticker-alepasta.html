@@ -149,7 +149,9 @@
         </button>
     </div>
 
-    <div class="sticker" id="stickerTarget">
+    <!-- JURUS PAMUNGKAS: Wrapper untuk mengecilkan ukuran secara visual saat akan di-render html2canvas agar TIDAK ADA ELEMEN yang dicull/dipotong -->
+    <div id="stickerWrapper" style="transform-origin: top left;">
+        <div class="sticker" id="stickerTarget">
         <!-- Custom Vector Decorations: Macaroni, Spaghetti, Burger, Hotdog -->
         
         <!-- 1. Macaroni -->
@@ -198,53 +200,58 @@
                 <div class="social-text">0813-9010-8787</div>
             </div>
         </div>
+        </div>
     </div>
 
     <script>
         function downloadSticker() {
             const btn = document.getElementById('downloadBtn');
             const target = document.getElementById('stickerTarget');
+            const wrapper = document.getElementById('stickerWrapper');
             
             btn.innerHTML = 'RENDERING... (MOHON TUNGGU)';
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
 
-            html2canvas(target, {
-                scale: 3, 
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#da291c',
-                windowWidth: 2000,
-                windowHeight: 2000,
-                scrollX: 0,
-                scrollY: 0,
-                onclone: function(clonedDoc) {
-                    // Mencegah clipping
-                    const clonedTarget = clonedDoc.getElementById('stickerTarget');
-                    clonedDoc.body.appendChild(clonedTarget);
-                    clonedTarget.style.position = 'absolute';
-                    clonedTarget.style.top = '0px';
-                    clonedTarget.style.left = '0px';
-                    clonedTarget.style.margin = '0px';
-                    clonedDoc.body.style.width = '2000px';
-                    clonedDoc.body.style.height = '2000px';
-                }
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'alepasta-sticker-6000px.png';
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-                
-                btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-            }).catch(err => {
-                console.error('Error generating image:', err);
-                alert('Gagal mendownload stiker.');
-                btn.innerHTML = 'COBA LAGI';
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-            });
+            // TRIK CULLING HTML2CANVAS:
+            // Kecilkan wrapper sehingga ukuran asli 2000x2000 muat di dalam layar (misal 400x400)
+            // html2canvas memotong elemen berdasarkan koordinat layar asli.
+            // Jika elemen muat di layar, tidak akan dipotong!
+            wrapper.style.transform = 'scale(0.2)';
+
+            // Gulir ke atas agar seluruh area 400x400 masuk layar
+            window.scrollTo(0, 0);
+
+            // Beri waktu sejenak agar browser me-render ukuran baru
+            setTimeout(() => {
+                html2canvas(target, {
+                    scale: 3, // Hasil akhir tetap 2000 x 3 = 6000px, parent transform diabaikan saat menggambar target!
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#da291c',
+                    scrollX: 0,
+                    scrollY: 0
+                }).then(canvas => {
+                    // Kembalikan ukuran
+                    wrapper.style.transform = 'none';
+
+                    const link = document.createElement('a');
+                    link.download = 'alepasta-sticker-6000px.png';
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    link.click();
+                    
+                    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
+                    btn.style.opacity = '1';
+                    btn.style.pointerEvents = 'auto';
+                }).catch(err => {
+                    wrapper.style.transform = 'none';
+                    console.error('Error generating image:', err);
+                    alert('Gagal mendownload stiker.');
+                    btn.innerHTML = 'COBA LAGI';
+                    btn.style.opacity = '1';
+                    btn.style.pointerEvents = 'auto';
+                });
+            }, 100);
         }
     </script>
 </body>
