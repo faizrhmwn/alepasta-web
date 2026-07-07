@@ -147,32 +147,41 @@
     </div>
 
     <div class="sticker" id="stickerTarget">
-        <!-- Custom Pasta Decorations -->
-        <!-- Farfalle -->
-        <svg class="deco deco-1" viewBox="0 0 100 100" fill="var(--yellow)">
-            <path d="M 10,15 C 20,30 20,70 10,85 C 40,65 60,65 90,85 C 80,70 80,30 90,15 C 60,35 40,35 10,15" />
-            <rect x="42" y="40" width="16" height="20" rx="5" fill="var(--cream)" opacity="0.5"/>
-        </svg>
+        <!-- Custom Vector Decorations: Macaroni, Spaghetti, Burger, Hotdog -->
         
-        <!-- Ravioli -->
-        <svg class="deco deco-2" viewBox="0 0 100 100">
-            <rect x="15" y="15" width="70" height="70" rx="5" fill="var(--cream)" stroke="var(--yellow)" stroke-width="6" stroke-dasharray="5, 5"/>
-            <rect x="30" y="30" width="40" height="40" rx="10" fill="var(--yellow)"/>
-        </svg>
-
-        <!-- Macaroni -->
-        <svg class="deco deco-3" viewBox="0 0 100 100">
+        <!-- 1. Macaroni -->
+        <svg class="deco deco-1" viewBox="0 0 100 100">
             <path d="M 25,75 C 25,20 75,20 75,75" stroke="var(--yellow)" stroke-width="25" stroke-linecap="round" fill="none"/>
-            <!-- shadow/highlight to make it look 3d -->
             <path d="M 25,75 C 25,20 75,20 75,75" stroke="var(--cream)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.4"/>
         </svg>
+        
+        <!-- 2. Spaghetti -->
+        <svg class="deco deco-2" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="80" rx="40" ry="10" fill="var(--cream)"/>
+            <path d="M 25,75 C 10,40 50,20 50,50 C 50,80 90,40 75,75" stroke="var(--yellow)" stroke-width="12" stroke-linecap="round" fill="none"/>
+            <path d="M 35,75 C 30,50 60,30 60,60 C 60,80 80,50 65,75" stroke="var(--yellow)" stroke-width="8" stroke-linecap="round" fill="none"/>
+        </svg>
 
-        <!-- Penne -->
+        <!-- 3. Burger -->
+        <svg class="deco deco-3" viewBox="0 0 100 100">
+            <!-- Top Bun -->
+            <path d="M 15,45 C 15,10 85,10 85,45 Z" fill="var(--yellow)"/>
+            <!-- Patty -->
+            <rect x="10" y="52" width="80" height="12" rx="6" fill="var(--cream)"/>
+            <!-- Cheese/Lettuce -->
+            <path d="M 15,64 L 25,72 L 40,64 L 60,72 L 75,64 L 85,72 L 85,64 Z" fill="var(--yellow)"/>
+            <!-- Bottom Bun -->
+            <rect x="20" y="75" width="60" height="15" rx="7" fill="var(--yellow)"/>
+        </svg>
+
+        <!-- 4. Hotdog -->
         <svg class="deco deco-4" viewBox="0 0 100 100">
-            <polygon points="20,80 10,60 70,20 80,40" fill="var(--cream)" stroke="var(--yellow)" stroke-width="6" stroke-linejoin="round"/>
-            <line x1="25" y1="70" x2="75" y2="30" stroke="var(--yellow)" stroke-width="5" stroke-linecap="round"/>
-            <line x1="35" y1="75" x2="85" y2="35" stroke="var(--yellow)" stroke-width="5" stroke-linecap="round"/>
-            <line x1="15" y1="65" x2="65" y2="25" stroke="var(--yellow)" stroke-width="5" stroke-linecap="round"/>
+            <!-- Bun (Bottom & Top overlapping shape) -->
+            <path d="M 10,50 C 10,20 90,20 90,50 C 90,80 10,80 10,50 Z" fill="var(--cream)"/>
+            <!-- Sausage -->
+            <rect x="15" y="42" width="70" height="16" rx="8" fill="var(--yellow)"/>
+            <!-- Mustard Squiggle -->
+            <path d="M 20,50 Q 25,45 30,50 T 40,50 T 50,50 T 60,50 T 70,50 T 80,50" stroke="var(--cream)" stroke-width="4" stroke-linecap="round" fill="none"/>
         </svg>
         
         <div class="content">
