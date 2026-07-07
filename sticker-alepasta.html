@@ -67,18 +67,16 @@
         }
 
         /* Content Area */
-        .food-deco {
+        .deco {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            object-fit: contain;
             z-index: 1;
-            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.3));
+            opacity: 0.9;
+            filter: drop-shadow(8px 8px 0 rgba(0,0,0,0.15));
         }
-        .deco-1 { top: -150px; left: -150px; transform: rotate(15deg); }
-        .deco-2 { top: -150px; right: -150px; transform: rotate(-20deg); }
-        .deco-3 { bottom: 130px; left: -150px; transform: rotate(-15deg); }
-        .deco-4 { bottom: 130px; right: -150px; transform: rotate(20deg); width: 700px; height: 700px;} /* Hotdog is longer */
+        .deco-1 { top: 120px; left: 150px; width: 180px; transform: rotate(15deg); }
+        .deco-2 { top: 180px; right: 180px; width: 160px; transform: rotate(-20deg); }
+        .deco-3 { bottom: 380px; left: 160px; width: 220px; transform: rotate(-10deg); }
+        .deco-4 { bottom: 400px; right: 180px; width: 160px; transform: rotate(25deg); }
 
         .content {
             flex: 1;
@@ -149,10 +147,11 @@
     </div>
 
     <div class="sticker" id="stickerTarget">
-        <img src="assets/img/bolognese.png" class="food-deco deco-1" alt="Bolognese">
-        <img src="assets/img/macncheese.png" class="food-deco deco-2" alt="Mac & Cheese">
-        <img src="assets/img/burger.png" class="food-deco deco-3" alt="Burger">
-        <img src="assets/img/classic-dog.png" class="food-deco deco-4" alt="Hotdog">
+        <!-- Abstract Modern Decorations -->
+        <svg class="deco deco-1" viewBox="0 0 100 100" fill="none" stroke="var(--yellow)" stroke-width="20" stroke-linecap="round"><path d="M 20 80 Q 50 20 80 80" /></svg>
+        <svg class="deco deco-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="none" stroke="var(--cream)" stroke-width="15"/><circle cx="50" cy="50" r="12" fill="var(--cream)"/></svg>
+        <svg class="deco deco-3" viewBox="0 0 100 100" fill="none" stroke="var(--yellow)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M 10 50 Q 30 10 50 50 T 90 50" /></svg>
+        <svg class="deco deco-4" viewBox="0 0 100 100" fill="none" stroke="var(--cream)" stroke-width="18" stroke-linecap="round"><path d="M 50 15 L 50 85 M 15 50 L 85 50" /></svg>
         
         <div class="content">
             <div class="brand">Alepasta</div>
