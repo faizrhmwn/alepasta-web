@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800;1,900&family=Knewave&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --red: #da291c;
@@ -100,6 +100,7 @@
             font-family: 'Knewave', cursive;
             font-size: 100px;
             color: var(--yellow);
+            text-shadow: 8px 8px 0 var(--dark);
             letter-spacing: 3px;
             transform: rotate(-3deg);
         }
@@ -215,16 +216,30 @@
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
 
-            // Menggunakan html-to-image yang lebih modern & bebas bug viewport
-            htmlToImage.toPng(target, {
-                pixelRatio: 3, // scale 3x (2000 -> 6000)
+            // Scale 3 to get 6000x6000 from 2000x2000
+            html2canvas(target, {
+                scale: 3, 
+                useCORS: true,
+                allowTaint: true,
                 backgroundColor: '#da291c',
-                width: 2000,
-                height: 2000
-            }).then(dataUrl => {
+                windowWidth: 2000,
+                windowHeight: 2000,
+                scrollX: 0,
+                scrollY: 0,
+                onclone: function(clonedDoc) {
+                    // Trik jitu: pindahkan elemen kloningan ke ujung kiri atas body
+                    // agar html2canvas tidak memotong elemen di luar viewport layar fisik
+                    const clonedTarget = clonedDoc.getElementById('stickerTarget');
+                    clonedDoc.body.appendChild(clonedTarget);
+                    clonedTarget.style.position = 'absolute';
+                    clonedTarget.style.top = '0px';
+                    clonedTarget.style.left = '0px';
+                    clonedTarget.style.margin = '0px';
+                }
+            }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'alepasta-sticker-6000px.png';
-                link.href = dataUrl;
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
                 
                 btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
