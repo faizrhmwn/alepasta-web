@@ -67,6 +67,32 @@
         }
 
         /* Content Area */
+        .inner-border {
+            position: absolute;
+            top: 70px;
+            left: 70px;
+            right: 70px;
+            bottom: 350px; /* leaves room for footer */
+            border: 15px dashed var(--yellow);
+            border-radius: 50px;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: var(--yellow);
+            font-family: sans-serif;
+            font-size: 180px;
+            z-index: 2;
+            text-shadow: 10px 10px 0 rgba(0,0,0,0.2);
+        }
+        .sparkle-1 { top: 120px; left: 140px; transform: rotate(15deg); }
+        .sparkle-2 { top: 180px; right: 180px; font-size: 130px; transform: rotate(-15deg); }
+        .sparkle-3 { bottom: 400px; left: 160px; font-size: 140px; transform: rotate(-25deg); }
+        .sparkle-4 { bottom: 380px; right: 140px; transform: rotate(20deg); }
+
         .content {
             flex: 1;
             display: flex;
@@ -135,6 +161,12 @@
     </div>
 
     <div class="sticker" id="stickerTarget">
+        <div class="inner-border"></div>
+        <div class="sparkle sparkle-1">✦</div>
+        <div class="sparkle sparkle-2">✦</div>
+        <div class="sparkle sparkle-3">✦</div>
+        <div class="sparkle sparkle-4">✦</div>
+        
         <div class="content">
             <div class="brand">Alepasta</div>
             <div class="tagline">Your Daily Homemade Pasta</div>
