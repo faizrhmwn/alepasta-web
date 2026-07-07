@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800;1,900&family=Knewave&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.2.0/dom-to-image-more.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --red: #da291c;
@@ -209,25 +209,36 @@
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
 
-            // Menggunakan dom-to-image-more yang anti-clipping dan men-support Google Fonts
-            var scale = 3; // 2000x2000 -> 6000x6000
-            domtoimage.toPng(target, {
-                width: 2000 * scale,
-                height: 2000 * scale,
-                style: {
-                    transform: 'scale(' + scale + ')',
-                    transformOrigin: 'top left'
+            html2canvas(target, {
+                scale: 3, 
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#da291c',
+                windowWidth: 2000,
+                windowHeight: 2000,
+                scrollX: 0,
+                scrollY: 0,
+                onclone: function(clonedDoc) {
+                    // Mencegah clipping
+                    const clonedTarget = clonedDoc.getElementById('stickerTarget');
+                    clonedDoc.body.appendChild(clonedTarget);
+                    clonedTarget.style.position = 'absolute';
+                    clonedTarget.style.top = '0px';
+                    clonedTarget.style.left = '0px';
+                    clonedTarget.style.margin = '0px';
+                    clonedDoc.body.style.width = '2000px';
+                    clonedDoc.body.style.height = '2000px';
                 }
-            }).then(function (dataUrl) {
+            }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'alepasta-sticker-6000px.png';
-                link.href = dataUrl;
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
                 
                 btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> DOWNLOAD STIKER (6000x6000px)';
                 btn.style.opacity = '1';
                 btn.style.pointerEvents = 'auto';
-            }).catch(function (err) {
+            }).catch(err => {
                 console.error('Error generating image:', err);
                 alert('Gagal mendownload stiker.');
                 btn.innerHTML = 'COBA LAGI';
