@@ -57,8 +57,6 @@
             width: 2000px;
             height: 2000px;
             background-color: var(--red);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Ctext x='25' y='75' font-size='45' opacity='0.12'%3E%F0%9F%8D%94%3C/text%3E%3Ctext x='125' y='75' font-size='45' opacity='0.12'%3E%F0%9F%8C%AD%3C/text%3E%3Ctext x='225' y='75' font-size='45' opacity='0.12'%3E%F0%9F%8D%9D%3C/text%3E%3Ctext x='25' y='175' font-size='45' opacity='0.12'%3E%F0%9F%8D%9D%3C/text%3E%3Ctext x='125' y='175' font-size='45' opacity='0.12'%3E%F0%9F%8D%94%3C/text%3E%3Ctext x='225' y='175' font-size='45' opacity='0.12'%3E%F0%9F%8C%AD%3C/text%3E%3C/svg%3E");
-            background-repeat: repeat;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -74,9 +72,9 @@
             filter: drop-shadow(8px 8px 0 rgba(0,0,0,0.15));
         }
         .deco-1 { top: 90px; left: 100px; width: 280px; transform: rotate(15deg); }
-        .deco-2 { top: 120px; right: 100px; width: 260px; transform: rotate(-20deg); }
-        .deco-3 { bottom: 330px; left: 100px; width: 330px; transform: rotate(-10deg); }
-        .deco-4 { bottom: 360px; right: 120px; width: 260px; transform: rotate(25deg); }
+        .deco-2 { top: 120px; left: 1640px; width: 260px; transform: rotate(-20deg); }
+        .deco-3 { top: 1340px; left: 100px; width: 330px; transform: rotate(-10deg); }
+        .deco-4 { top: 1380px; left: 1620px; width: 260px; transform: rotate(25deg); }
 
         .content {
             flex: 1;
@@ -125,7 +123,6 @@
         .social-group img {
             width: 90px;
             height: 90px;
-            filter: brightness(0); /* Make icons black */
         }
 
         .social-text {
@@ -150,20 +147,20 @@
         <!-- Custom Vector Decorations: Macaroni, Spaghetti, Burger, Hotdog -->
         
         <!-- 1. Macaroni -->
-        <svg class="deco deco-1" viewBox="0 0 100 100">
+        <svg class="deco deco-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <path d="M 25,75 C 25,20 75,20 75,75" stroke="var(--yellow)" stroke-width="25" stroke-linecap="round" fill="none"/>
             <path d="M 25,75 C 25,20 75,20 75,75" stroke="var(--cream)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.4"/>
         </svg>
         
         <!-- 2. Spaghetti -->
-        <svg class="deco deco-2" viewBox="0 0 100 100">
+        <svg class="deco deco-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <ellipse cx="50" cy="80" rx="40" ry="10" fill="var(--cream)"/>
             <path d="M 25,75 C 10,40 50,20 50,50 C 50,80 90,40 75,75" stroke="var(--yellow)" stroke-width="12" stroke-linecap="round" fill="none"/>
             <path d="M 35,75 C 30,50 60,30 60,60 C 60,80 80,50 65,75" stroke="var(--yellow)" stroke-width="8" stroke-linecap="round" fill="none"/>
         </svg>
 
         <!-- 3. Burger -->
-        <svg class="deco deco-3" viewBox="0 0 100 100">
+        <svg class="deco deco-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <!-- Top Bun -->
             <path d="M 15,45 C 15,10 85,10 85,45 Z" fill="var(--yellow)"/>
             <!-- Patty -->
@@ -175,7 +172,7 @@
         </svg>
 
         <!-- 4. Hotdog -->
-        <svg class="deco deco-4" viewBox="0 0 100 100">
+        <svg class="deco deco-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <!-- Bun (Bottom & Top overlapping shape) -->
             <path d="M 10,50 C 10,20 90,20 90,50 C 90,80 10,80 10,50 Z" fill="var(--cream)"/>
             <!-- Sausage -->
@@ -190,17 +187,15 @@
         </div>
         <div class="footer">
             <div class="social-group">
-                <!-- Using placeholder for Instagram since we use filter: brightness(0) to make it black -->
-                <img src="assets/img/ig-icon.png" alt="Instagram" onerror="this.src='https://cdn-icons-png.flaticon.com/512/174/174855.png'">
+                <img src="https://cdn.simpleicons.org/instagram/1a1a1a" crossorigin="anonymous" alt="Instagram">
                 <div class="social-text">alepasta.co</div>
             </div>
             <div class="social-group">
-                <img src="assets/img/grab-icon.png" alt="GrabFood" onerror="this.src='https://cdn-icons-png.flaticon.com/512/732/732205.png'">
+                <img src="https://cdn.simpleicons.org/grab/1a1a1a" crossorigin="anonymous" alt="GrabFood">
                 <div class="social-text">Alepasta</div>
             </div>
             <div class="social-group">
-                <!-- Using placeholder for WhatsApp -->
-                <img src="assets/img/wa-icon.png" alt="WhatsApp" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1384/1384023.png'">
+                <img src="https://cdn.simpleicons.org/whatsapp/1a1a1a" crossorigin="anonymous" alt="WhatsApp">
                 <div class="social-text">0813-9010-8787</div>
             </div>
         </div>
